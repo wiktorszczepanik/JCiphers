@@ -23,7 +23,7 @@ public enum CipherTypes {
         return decryptionOptions;
     }
 
-    public byte getGetEncyptionOptions() {
+    public byte getGenerateOptions() {
         return getEncyptionOptions;
     }
 

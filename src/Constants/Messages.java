@@ -25,12 +25,18 @@ public class Messages {
         messages.put("inf.flg.typ.hlp", "There will be HELP instruction.");
 
         // Exceptions & Errors messages
+        messages.put("err.flg.typ.bas", ": Incorrect flags. Use (-h, --help) to check possible options.");
         messages.put("err.flg.typ.hlp", ": Incorrect flags. Help flag (-h, --help) need to be the only one in set.");
         messages.put("err.flg.typ.fst", ": Incorrect syntax of first flag. E.g. -t -e -g");
         messages.put("err.flg.typ.reg", ": Incorrect flag syntax.\nPossible flags are -t, -e, -d, -g, -k, -o, -h");
+        messages.put("err.flg.typ.act", ": Incorrect flags.\nPossible flags are -e, -d, -g");
         messages.put("err.flg.typ.mod", ": Incorrect number of flags.\nAll of the flags need to have pair.");
         messages.put("err.flg.typ.nex", ": Incorrect syntax of flag value.\nPossible values are cipher type or path to file.");
         messages.put("err.flg.typ.typ", ": Incorrect cipher. Provided cipher doesn't exist.");
+        messages.put("err.flg.typ.tps", ": Cipher type is not provided.");
+
+        messages.put("err.fil.reg.key", ": Problem with reading file with key.");
+        messages.put("err.fil.nul.key", ": Provided key file is empty.");
 
     }
 }

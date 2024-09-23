@@ -9,29 +9,34 @@ import Structures.FlagTuple;
 public class CipherValidation {
 
     private final String cipherType;
-    private final int cipherAction;
+    private final byte optionsTemplate;
     private final byte options;
     Messages messages = Messages.getInstance();
 
-    public CipherValidation(FlagTuple<ActionTypes, String> cipherType, FlagTuple<ActionTypes, String> cipherAction, byte options) {
-        this.cipherType = cleanCipherType(cipherType.value);
-        this.cipherAction = cleanAction(cipherAction.flag.getShortFlag());
+    public CipherValidation(FlagTuple<ActionTypes, String> cipherType, FlagTuple<ActionTypes, String> optionsTemplate, byte options)
+        throws  FlagExcpetion {
+        this.cipherType = cipherType.value;
+        this.optionsTemplate = cleanAction(optionsTemplate.flag.getShortFlag());
         this.options = options;
     }
 
-    private String cleanCipherType(String type) {
-        return type.trim().toUpperCase();
-    }
-
-    private int cleanAction(String ) {
-        if (cipherAction.e)
-    }
-
-    public void validate() throws FlagExcpetion {
-        CipherTypes selectedType;
-        try { selectedType = CipherTypes.valueOf(cipherType);
+    private byte cleanAction(String actionFlag) throws FlagExcpetion {
+        CipherTypes type;
+        try { type = CipherTypes.valueOf(cipherType);
         } catch (IllegalArgumentException iae) {
             throw new FlagExcpetion(messages.get("err.flg.typ.typ"));
         }
+        char flag = actionFlag.charAt(1);
+        return switch (flag) {
+            case 'e' -> type.getEncyptionOptions();
+            case 'd' -> type.getDecryptionOptions();
+            case 'g' -> type.getGenerateOptions();
+            default -> throw new FlagExcpetion(messages.get("err.flg.typ.act"));
+        };
+    }
+
+    public void validate() throws FlagExcpetion {
+        byte checker = (byte) (optionsTemplate ^ options);
+        if (checker > 1) throw new FlagExcpetion("err.flg.typ.bas");
     }
 }

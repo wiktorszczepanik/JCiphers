@@ -1,4 +1,4 @@
-import Ciphers.Crypt;
+import Ciphers.BaseCrypt;
 import Components.CipherSelector;
 import Components.CipherValidation;
 import Components.FlagCollector;
@@ -7,6 +7,7 @@ import Constants.Messages;
 import Exceptions.FlagExcpetion;
 import Structures.FlagTuple;
 
+import java.io.IOException;
 import java.util.List;
 
 public class JCipher {
@@ -28,25 +29,29 @@ public class JCipher {
                 flags.collectFlags();
                 flags.sortFlags();
                 flags.sequenceBits();
+                flags.cleanCipherName();
 
+                // Get base values
                 List<FlagTuple<ActionTypes, String>> sortedFlags;
                 sortedFlags = flags.getFlags();
                 byte options = flags.getActionBits();
 
                 // Cipher validation
-                // -----------------------------------------
-                var qc = new CipherValidation(sortedFlags.getFirst(), sortedFlags.get(1), options);
-                qc.validate();
-                // -----------------------------------------
+                CipherValidation qualityCheck;
+                qualityCheck = new CipherValidation(
+                    sortedFlags.getFirst(), sortedFlags.get(1), options
+                );
+                qualityCheck.validate();
 
                 // Cipher selection
-                var lookForCipher = new CipherSelector(sortedFlags.getFirst(), options);
-                Crypt cipher = lookForCipher.select();
+                CipherSelector lookForCipher;
+                lookForCipher = new CipherSelector(
+                    sortedFlags.getFirst(), options
+                );
+                BaseCrypt cipher = lookForCipher.select(sortedFlags);
 
-
-
-            } catch (FlagExcpetion fe) {
-                fe.getMessage();
+            } catch (FlagExcpetion exception) {
+                exception.getMessage();
             }
         }
     }

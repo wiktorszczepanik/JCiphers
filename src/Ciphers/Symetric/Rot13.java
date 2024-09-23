@@ -1,33 +1,35 @@
 package Ciphers.Symetric;
 
-import Ciphers.Crypt;
+import Ciphers.CipherParameters;
+import Ciphers.BaseCrypt;
+import Constants.Flags.ActionTypes;
 import Constants.Flags.CipherTypes;
+import Exceptions.DecryptionException;
+import Exceptions.EncryptionException;
+import Exceptions.GenerateException;
+import Structures.FlagTuple;
 
-public class Rot13 implements Crypt, SymmetricCrypt {
+import java.util.List;
 
-    private CipherTypes type = CipherTypes.ROT13;
-    private byte selectedOptions;
+public class Rot13 extends CipherParameters
+    implements BaseCrypt, SymmetricCrypt {
 
-    public Rot13(byte selectedOptions) {
-        this.selectedOptions = selectedOptions;
-    }
-
-    public CipherTypes getType() {
-        return type;
+    public Rot13(byte selectedOptions, List<FlagTuple<ActionTypes, String>> flags) {
+        super(selectedOptions, flags);
     }
 
     @Override
-    public StringBuilder encrypt() {
+    public StringBuilder encrypt() throws EncryptionException {
         return null;
     }
 
     @Override
-    public StringBuilder decrypt() {
+    public StringBuilder decrypt() throws DecryptionException {
         return null;
     }
 
     @Override
-    public StringBuilder generate() {
+    public StringBuilder generate() throws GenerateException {
         return null;
     }
 }

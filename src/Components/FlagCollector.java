@@ -46,6 +46,14 @@ public class FlagCollector {
          }
      }
 
+     public void cleanCipherName() throws FlagExcpetion {
+         if (flags.getFirst().flag == ActionTypes.TYPE) {
+             String cipherType = flags.getFirst().value;
+             cipherType = cipherType.trim().toUpperCase();
+             flags.getFirst().value = cipherType;
+         } else throw new FlagExcpetion(messages.get("err.flg.typ.tps"));
+     }
+
      public void sortFlags() {
          flags.sort(new FlagsOrder());
      }
