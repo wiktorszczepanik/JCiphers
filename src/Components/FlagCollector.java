@@ -2,7 +2,7 @@ package Components;
 
 import Constants.Flags.ActionTypes;
 import Constants.Messages;
-import Exceptions.FlagExcpetion;
+import Exceptions.FlagException;
 import Structures.FlagsOrder;
 import Structures.FlagTuple;
 
@@ -20,38 +20,52 @@ public class FlagCollector {
          this.args = args;
      }
 
-     public void collectFlags() throws FlagExcpetion {
+     public void collectFlags() throws FlagException {
          if (args[0].charAt(0) != '-')
-             throw new FlagExcpetion(args[0].concat(messages.get("err.flg.typ.fst")));
+             throw new FlagException(args[0].concat(messages.get("err.flg.typ.fst")));
          int counter = 0;
          ActionTypes flag;
          String value;
-         if (args.length % 2 != 0)
-             throw new FlagExcpetion(messages.get("err.flg.typ.mod"));
+         int flagsLength = countFlags(args);
+         if (flagsLength % 2 != 0)
+             throw new FlagException(messages.get("err.flg.typ.mod"));
          while (counter < args.length) {
              switch (args[counter].trim().toLowerCase()) {
                  case "-t", "--type" -> flag = ActionTypes.TYPE;
                  case "-e", "--encrypt" -> flag = ActionTypes.ENCRYPT;
                  case "-d", "--decrypt" -> flag = ActionTypes.DECRYPT;
-                 case "-g", "--generate" -> flag = ActionTypes.GENERATE;
-                 case "-k", "--key" -> flag = ActionTypes.KEY;
+                 case "-g", "--generate" -> {
+                     flag = ActionTypes.GENERATE;
+                     flags.add(new FlagTuple<>(flag, null));
+                     counter++;
+                     continue;
+                 } case "-k", "--key" -> flag = ActionTypes.KEY;
                  case "-o", "--output" -> flag = ActionTypes.OUTPUT;
-                 case "-h", "--help" -> throw new FlagExcpetion(messages.get("err.flg.typ.hlp"));
-                 default -> throw new FlagExcpetion(
+                 case "-h", "--help" -> throw new FlagException(messages.get("err.flg.typ.hlp"));
+                 default -> throw new FlagException(
                      args[counter] + " " + messages.get("err.flg.typ.reg"));
              }
              value = args[counter + 1];
-             flags.add(new FlagTuple(flag, value));
+             flags.add(new FlagTuple<>(flag, value));
              counter+=2;
          }
      }
 
-     public void cleanCipherName() throws FlagExcpetion {
+     private int countFlags(String[] flags) {
+         int baseLength = args.length;
+         for (int i = 0; i < args.length; i++)
+             if (args[i].equals("-g") || args[i].equals("--generate"))
+                 return ++baseLength;
+         return baseLength;
+
+     }
+
+     public void cleanCipherName() throws FlagException {
          if (flags.getFirst().flag == ActionTypes.TYPE) {
              String cipherType = flags.getFirst().value;
              cipherType = cipherType.trim().toUpperCase();
              flags.getFirst().value = cipherType;
-         } else throw new FlagExcpetion(messages.get("err.flg.typ.tps"));
+         } else throw new FlagException(messages.get("err.flg.typ.tps"));
      }
 
      public void sortFlags() {

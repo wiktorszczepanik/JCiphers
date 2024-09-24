@@ -15,7 +15,7 @@ public enum CipherTypes {
         this.getEncyptionOptions = generateOptions;
     }
 
-    public byte getEncyptionOptions() {
+    public byte getEncryptionOptions() {
         return encyptionOptions;
     }
 

@@ -1,13 +1,12 @@
-import Ciphers.BaseCrypt;
+import Ciphers.UtilCipher;
 import Components.CipherSelector;
 import Components.CipherValidation;
 import Components.FlagCollector;
 import Constants.Flags.ActionTypes;
 import Constants.Messages;
-import Exceptions.FlagExcpetion;
+import Exceptions.*;
 import Structures.FlagTuple;
 
-import java.io.IOException;
 import java.util.List;
 
 public class JCipher {
@@ -18,7 +17,7 @@ public class JCipher {
         String[] tempArgs = new String[] {
             "-t", "ROT13",
             "-e", "./rot13.txt",
-            "-k", ".key.txt",
+//            "-k", ".key.txt",
             "-o", "./encRot13.txt"
         };
         if (tempArgs[0].equals("-h") || tempArgs[0].equals("--help"))
@@ -48,10 +47,13 @@ public class JCipher {
                 lookForCipher = new CipherSelector(
                     sortedFlags.getFirst(), options
                 );
-                BaseCrypt cipher = lookForCipher.select(sortedFlags);
+                UtilCipher cipher = lookForCipher.select(sortedFlags);
+                cipher.run();
 
-            } catch (FlagExcpetion exception) {
-                exception.getMessage();
+            } catch (FlagException flagException) {
+                flagException.getMessage();
+            } catch (EncryptionException | DecryptionException | GenerateException cipherException) {
+                cipherException.getMessage();
             }
         }
     }

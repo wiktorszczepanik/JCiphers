@@ -1,11 +1,11 @@
 package Components;
 
-import Ciphers.BaseCrypt;
 import Ciphers.Symetric.Rot13;
+import Ciphers.UtilCipher;
 import Constants.Flags.ActionTypes;
 import Constants.Flags.CipherTypes;
 import Constants.Messages;
-import Exceptions.FlagExcpetion;
+import Exceptions.FlagException;
 import Structures.FlagTuple;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class CipherSelector {
         this.options = options;
     }
 
-    public BaseCrypt select(List<FlagTuple<ActionTypes, String>> flags) throws FlagExcpetion {
+    public UtilCipher select(List<FlagTuple<ActionTypes, String>> flags) throws FlagException {
         return switch (CipherTypes.valueOf(cipherType)) {
             case CipherTypes.ROT13 -> new Rot13(options, flags);
             // future ciphers ...

@@ -3,7 +3,7 @@ package Components;
 import Constants.Flags.ActionTypes;
 import Constants.Flags.CipherTypes;
 import Constants.Messages;
-import Exceptions.FlagExcpetion;
+import Exceptions.FlagException;
 import Structures.FlagTuple;
 
 public class CipherValidation {
@@ -14,29 +14,30 @@ public class CipherValidation {
     Messages messages = Messages.getInstance();
 
     public CipherValidation(FlagTuple<ActionTypes, String> cipherType, FlagTuple<ActionTypes, String> optionsTemplate, byte options)
-        throws  FlagExcpetion {
+        throws FlagException {
         this.cipherType = cipherType.value;
         this.optionsTemplate = cleanAction(optionsTemplate.flag.getShortFlag());
         this.options = options;
     }
 
-    private byte cleanAction(String actionFlag) throws FlagExcpetion {
+    private byte cleanAction(String actionFlag) throws FlagException {
         CipherTypes type;
         try { type = CipherTypes.valueOf(cipherType);
         } catch (IllegalArgumentException iae) {
-            throw new FlagExcpetion(messages.get("err.flg.typ.typ"));
+            throw new FlagException(messages.get("err.flg.typ.typ"));
         }
         char flag = actionFlag.charAt(1);
         return switch (flag) {
-            case 'e' -> type.getEncyptionOptions();
+            case 'e' -> type.getEncryptionOptions();
             case 'd' -> type.getDecryptionOptions();
             case 'g' -> type.getGenerateOptions();
-            default -> throw new FlagExcpetion(messages.get("err.flg.typ.act"));
+            default -> throw new FlagException(messages.get("err.flg.typ.act"));
         };
     }
 
-    public void validate() throws FlagExcpetion {
+    public void validate() throws FlagException {
+        // TODO: Check why throwing error does not work.
         byte checker = (byte) (optionsTemplate ^ options);
-        if (checker > 1) throw new FlagExcpetion("err.flg.typ.bas");
+        if (checker > 1) throw new FlagException(messages.get("err.flg.typ.bas"));
     }
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/j-ciphers.iml" filepath="$PROJECT_DIR$/j-ciphers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JCiphers.iml" filepath="$PROJECT_DIR$/JCiphers.iml" />
     </modules>
   </component>
 </project>

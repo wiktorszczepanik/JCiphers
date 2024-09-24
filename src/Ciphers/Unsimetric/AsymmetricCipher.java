@@ -1,6 +1,6 @@
 package Ciphers.Unsimetric;
 
-public interface UnsymmetricalCrypt {
+public interface AsymmetricCipher {
 
     //-----------------------------------
 
