@@ -25,11 +25,11 @@ public abstract class UtilCipher {
         this.flags = flags;
     }
 
-    abstract protected StringBuilder encrypt() throws EncryptionException;
-    abstract protected StringBuilder decrypt() throws DecryptionException;
-    abstract protected StringBuilder generate() throws GenerateException;
+    abstract protected StringBuilder encrypt() throws EncryptionException, FileException;
+    abstract protected StringBuilder decrypt() throws DecryptionException, FileException;
+    abstract protected StringBuilder generate() throws GenerateException, FileException;
 
-    public void run() throws EncryptionException, DecryptionException, GenerateException {
+    public void run() throws EncryptionException, DecryptionException, GenerateException, FileException {
         int mode = (selectedOptions >> 2) & 0b111;
         if (mode == 0b100) encrypt();
         else if (mode == 0b010) decrypt();
@@ -97,7 +97,7 @@ public abstract class UtilCipher {
 
     }
 
-    private int flagSelector(ActionTypes searchFlag) {
+    protected int flagSelector(ActionTypes searchFlag) {
         int flagIndex = 0, counter = 0;
         for (FlagTuple pair : flags) {
             if (pair.flag == searchFlag)
