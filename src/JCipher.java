@@ -16,18 +16,18 @@ public class JCipher {
 
     public static void main(String[] args) {
         String[] tempArgs = new String[] {
-            "-t", "ROT13",
-//            "--type", "ROT13",
-            "-e", "./rot13.txt",
-//            "--encrypt", "./rot13.txt",
-//            "-d", "./rot13.txt",
-//            "--decrypt", "./rot13.txt",
+//            "-t", "ROT13",
+            "--type", "ROT13",
+//            "-e", "Tests/Rot13/clear.txt",
+//            "--encrypt", "Tests/Rot13/clear.txt",
+            "-d", "Tests/Rot13/cipher.txt",
+//            "--decrypt", "Tests/Rot13/out.txt",
 //            "-g",
 //            "--generate",
-//            "-k", ".key.txt",
-            "--key", ".key.txt",
-//            "-o", "./encRot13.txt"
-//            "--output", "./encRot13.txt"
+//            "-k", "Tests/Rot13/out.txt",
+//            "--key", "Tests/Rot13/out.txt",
+//            "-o", "Tests/Rot13/cipher.txt"
+            "--output", "Tests/Rot13/out.txt",
 //            "-h",
 //            "--help",
         };

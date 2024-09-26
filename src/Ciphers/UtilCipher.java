@@ -17,7 +17,7 @@ import java.util.List;
 public abstract class UtilCipher {
 
     private byte selectedOptions;
-    private List<FlagTuple<ActionTypes, String>> flags;
+    protected List<FlagTuple<ActionTypes, String>> flags;
     Messages messages = Messages.getInstance();
 
     public UtilCipher(byte selectedOptions, List<FlagTuple<ActionTypes, String>> flags) {
@@ -25,9 +25,9 @@ public abstract class UtilCipher {
         this.flags = flags;
     }
 
-    abstract protected StringBuilder encrypt() throws EncryptionException, FileException;
-    abstract protected StringBuilder decrypt() throws DecryptionException, FileException;
-    abstract protected StringBuilder generate() throws GenerateException, FileException;
+    abstract protected void encrypt() throws EncryptionException, FileException;
+    abstract protected void decrypt() throws DecryptionException, FileException;
+    abstract protected void generate() throws GenerateException, FileException;
 
     public void run() throws EncryptionException, DecryptionException, GenerateException, FileException {
         int mode = (selectedOptions >> 2) & 0b111;
@@ -37,9 +37,8 @@ public abstract class UtilCipher {
     }
 
     protected StringBuilder readFileContent(ActionTypes action) throws FileException {
-        int index = flagSelector(action);
-        File file = new File(flags.get(index).value);
-        StringBuilder key = null;
+        File file = new File(valueSelector(action));
+        StringBuilder key = new StringBuilder();
         try {
             FileReader fileReader = new FileReader(file);
             int state;
@@ -58,9 +57,9 @@ public abstract class UtilCipher {
         if (action.getShortFlag().equals("-e"))
             throw new FileException(messages.get("err.red.reg.enc"));
         else if (action.getShortFlag().equals("-d"))
-            throw new FileException("err.red.reg.dec");
+            throw new FileException(messages.get("err.red.reg.dec"));
         else if (action.getShortFlag().equals("-k"))
-            throw new FileException("err.red.reg.key");
+            throw new FileException(messages.get("err.red.reg.key"));
         else throw new FileException(messages.get("err.red.reg.all"));
     }
 
@@ -68,15 +67,14 @@ public abstract class UtilCipher {
         if (action.getShortFlag().equals("-e"))
             throw new FileException(messages.get("err.red.nul.enc"));
         else if (action.getShortFlag().equals("-d"))
-            throw new FileException("err.red.nul.dec");
+            throw new FileException(messages.get("err.red.nul.dec"));
         else if (action.getShortFlag().equals("-k"))
-            throw new FileException("err.red.nul.key");
+            throw new FileException(messages.get("err.red.nul.key"));
         else throw new FileException(messages.get("err.red.nul.all"));
     }
 
     protected void writeFileContent(ActionTypes action, StringBuilder text) throws FileException {
-        int index = flagSelector(action);
-        File file = new File(flags.get(index).value);
+        File file = new File(valueSelector(action));
         try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.append(text);
@@ -97,8 +95,8 @@ public abstract class UtilCipher {
 
     }
 
-    protected int flagSelector(ActionTypes searchFlag) {
-        int flagIndex = 0, counter = 0;
+    protected int flagTupleSelector(ActionTypes searchFlag) {
+        int flagIndex = -1, counter = 0;
         for (FlagTuple pair : flags) {
             if (pair.flag == searchFlag)
                 flagIndex = counter;
@@ -106,4 +104,9 @@ public abstract class UtilCipher {
         }
         return flagIndex;
     }
+
+    private String valueSelector(ActionTypes flag) {
+        return flags.get(flagTupleSelector(flag)).value;
+    }
+
 }

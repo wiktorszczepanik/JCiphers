@@ -44,14 +44,10 @@ public class CipherValidation {
         int overAct = (options >> 2) & 0b111;
         if (!(overAct == 1 || overAct == 2 || overAct == 4))
             throw new FlagException(messages.get("err.flg.typ.crp"));
-        if (((checker >> 4) & 0b1) == 1)
-            throw new FlagException(messages.get("err.flg.typ.enc"));
-        if (((checker >> 3) & 0b1) == 1)
-            throw new FlagException(messages.get("err.flg.typ.dec"));
-        if (((checker >> 2) & 0b1) == 1)
-            throw new FlagException(messages.get("err.flg.typ.gen"));
-        if (((checker >> 1) & 0b1) == 1)
-            throw new FlagException(messages.get("err.flg.typ.key"));
+        if (((checker >> 1) & 0b1) == 1) {
+            if (((options >> 1) & 0b1) == 1) throw new FlagException(messages.get("err.flg.mis.key"));
+            else throw new FlagException(messages.get("err.flg.typ.key"));
+        }
         if (checker > 1)
             throw new FlagException(messages.get("err.flg.typ.bas"));
     }

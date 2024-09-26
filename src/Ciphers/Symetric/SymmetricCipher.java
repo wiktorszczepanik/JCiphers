@@ -4,5 +4,5 @@ import Exceptions.FileException;
 import Exceptions.GenerateException;
 
 public interface SymmetricCipher {
-    public StringBuilder generate() throws GenerateException, FileException;
+    public void generate() throws GenerateException, FileException;
 }

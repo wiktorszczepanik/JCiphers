@@ -26,6 +26,7 @@ public class FlagCollector {
          int counter = 0;
          ActionTypes flag;
          String value;
+         checkForHelp(args);
          int flagsLength = countFlags(args);
          if (flagsLength % 2 != 0)
              throw new FlagException(messages.get("err.flg.typ.mod"));
@@ -49,6 +50,12 @@ public class FlagCollector {
              flags.add(new FlagTuple<>(flag, value));
              counter+=2;
          }
+     }
+
+     private void checkForHelp(String[] args) throws FlagException {
+         for (String flag : args)
+             if (flag.equals("--help") || flag.equals("-h"))
+                 throw new FlagException(messages.get("err.flg.typ.hlp"));
      }
 
      private int countFlags(String[] flags) {
