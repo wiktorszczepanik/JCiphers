@@ -1,5 +1,6 @@
 package Ciphers.Symetric;
 
+import Ciphers.SymmetricCipher;
 import Ciphers.UtilCipher;
 import Ciphers.BaseCipher;
 import Constants.Flags.ActionTypes;

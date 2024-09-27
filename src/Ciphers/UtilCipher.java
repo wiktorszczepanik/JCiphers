@@ -18,7 +18,7 @@ public abstract class UtilCipher {
 
     private byte selectedOptions;
     protected List<FlagTuple<ActionTypes, String>> flags;
-    Messages messages = Messages.getInstance();
+    protected Messages messages = Messages.getInstance();
 
     public UtilCipher(byte selectedOptions, List<FlagTuple<ActionTypes, String>> flags) {
         this.selectedOptions = selectedOptions;

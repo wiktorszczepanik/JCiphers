@@ -1,4 +1,4 @@
-package Ciphers.Symetric;
+package Ciphers;
 
 import Exceptions.FileException;
 import Exceptions.GenerateException;

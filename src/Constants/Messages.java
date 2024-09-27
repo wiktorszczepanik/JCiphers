@@ -58,5 +58,7 @@ public class Messages {
         messages.put("err.wrt.reg.key", ": Problem with writing key to provided file.");
         messages.put("err.wrt.reg.all", ": Provided file is empty.");
 
+        // Encryption errors
+        messages.put("err.enc.cot.key", ": Provided key has incorrect syntax. (0-9)");
     }
 }

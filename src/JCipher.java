@@ -17,17 +17,17 @@ public class JCipher {
     public static void main(String[] args) {
         String[] tempArgs = new String[] {
 //            "-t", "ROT13",
-            "--type", "ROT13",
-//            "-e", "Tests/Rot13/clear.txt",
+            "--type", "CEZAR",
+//            "-e", "test/Cezar/clear.txt",
 //            "--encrypt", "Tests/Rot13/clear.txt",
-            "-d", "Tests/Rot13/cipher.txt",
+//            "-d", "test/Cezar/Out14.txt",
 //            "--decrypt", "Tests/Rot13/out.txt",
 //            "-g",
 //            "--generate",
 //            "-k", "Tests/Rot13/out.txt",
-//            "--key", "Tests/Rot13/out.txt",
-//            "-o", "Tests/Rot13/cipher.txt"
-            "--output", "Tests/Rot13/out.txt",
+//            "--key", "test/Cezar/key.txt",
+//            "-o", "test/Cezar/Out14.txt"
+//            "--output", "Tests/Rot13/out.txt",
 //            "-h",
 //            "--help",
         };

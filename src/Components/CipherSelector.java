@@ -1,5 +1,6 @@
 package Components;
 
+import Ciphers.Symetric.Cezar;
 import Ciphers.Symetric.Rot13;
 import Ciphers.UtilCipher;
 import Constants.Flags.ActionTypes;
@@ -24,6 +25,7 @@ public class CipherSelector {
     public UtilCipher select(List<FlagTuple<ActionTypes, String>> flags) throws FlagException {
         return switch (CipherTypes.valueOf(cipherType)) {
             case CipherTypes.ROT13 -> new Rot13(options, flags);
+            case CipherTypes.CEZAR -> new Cezar(options, flags);
             // future ciphers ...
         };
     }

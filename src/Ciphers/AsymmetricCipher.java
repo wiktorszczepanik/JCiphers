@@ -1,4 +1,4 @@
-package Ciphers.Unsimetric;
+package Ciphers;
 
 public interface AsymmetricCipher {
 
