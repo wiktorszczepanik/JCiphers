@@ -27,19 +27,21 @@ public class FlagCollector {
          ActionTypes flag;
          String value;
          checkForHelp(args);
-         int flagsLength = countFlags(args);
-         if (flagsLength % 2 != 0)
-             throw new FlagException(messages.get("err.flg.typ.mod"));
          while (counter < args.length) {
              switch (args[counter].trim().toLowerCase()) {
                  case "-t", "--type" -> flag = ActionTypes.TYPE;
                  case "-e", "--encrypt" -> flag = ActionTypes.ENCRYPT;
                  case "-d", "--decrypt" -> flag = ActionTypes.DECRYPT;
                  case "-g", "--generate" -> {
-                     flag = ActionTypes.GENERATE;
-                     flags.add(new FlagTuple<>(flag, null));
-                     counter++;
-                     continue;
+                     if (counter < args.length - 1
+                         && args[counter + 1].charAt(0) != '-')
+                         flag = ActionTypes.GENERATE;
+                     else {
+                         flag = ActionTypes.GENERATE;
+                         flags.add(new FlagTuple<>(flag, null));
+                         counter++;
+                         continue;
+                     }
                  } case "-k", "--key" -> flag = ActionTypes.KEY;
                  case "-o", "--output" -> flag = ActionTypes.OUTPUT;
                  case "-h", "--help" -> throw new FlagException(messages.get("err.flg.typ.hlp"));
@@ -58,6 +60,7 @@ public class FlagCollector {
                  throw new FlagException(messages.get("err.flg.typ.hlp"));
      }
 
+     @Deprecated
      private int countFlags(String[] flags) {
          int baseLength = args.length;
          for (int i = 0; i < args.length; i++)

@@ -39,27 +39,19 @@ public class Rot13 extends UtilCipher
     public void encrypt() throws EncryptionException, FileException {
         StringBuilder textToEncrypt = readFileContent(ActionTypes.ENCRYPT);
         StringBuilder encryptedText = algorithm(textToEncrypt);
-        if (flagTupleSelector(ActionTypes.OUTPUT) == -1)
-            System.out.println(encryptedText);
-        else writeFileContent(ActionTypes.OUTPUT, encryptedText);
+        print(encryptedText);
     }
 
     @Override
     public void decrypt() throws DecryptionException, FileException {
         StringBuilder textToDecrypt = readFileContent(ActionTypes.DECRYPT);
         StringBuilder decryptedText = algorithm(textToDecrypt);
-        if (flagTupleSelector(ActionTypes.OUTPUT) == -1)
-            System.out.println(decryptedText);
-        else writeFileContent(ActionTypes.OUTPUT, decryptedText);
+        print(decryptedText);
     }
 
     @Override
     public void generate() throws GenerateException, FileException {
-        if (flagTupleSelector(ActionTypes.OUTPUT) == -1)
-            System.out.println(key);
-        else writeFileContent(
-            ActionTypes.OUTPUT, new StringBuilder(Integer.toString(key))
-        );
+        print(Integer.toString(key));
     }
 
 }

@@ -25,6 +25,7 @@ public class Messages {
         messages.put("inf.flg.typ.hlp", "There will be HELP instruction.");
 
         // Flag exceptions & errors
+        messages.put("err.flg.bas.zer", ": Flags not provided.");
         messages.put("err.flg.num.sml", ": Incorrect number of flags. Minimum possible number of flags is 2.");
         messages.put("err.flg.num.big", ": Incorrect number of flags. Maximum possible number of flags is 4.");
         messages.put("err.flg.typ.bas", ": Incorrect flags. Use (-h, --help) to check possible options.");
@@ -41,6 +42,7 @@ public class Messages {
         messages.put("err.flg.typ.key", ": --key flag is missing. It is required with provided cipher type.");
         messages.put("err.flg.mis.key", ": --key is incorrect flag in current options configuration.");
         messages.put("err.flg.typ.out", ": Incorrect flags -> --output flag.");
+        messages.put("err.flg.gen.out", ": Incorrect value for generate flag.");
 
         // Reading files exceptions
         messages.put("err.red.reg.enc", ": Problem with reading file with encryption text.");
@@ -57,8 +59,10 @@ public class Messages {
         messages.put("err.wrt.reg.dec", ": Problem with writing decrypted data to provided file.");
         messages.put("err.wrt.reg.key", ": Problem with writing key to provided file.");
         messages.put("err.wrt.reg.all", ": Provided file is empty.");
-
-        // Encryption errors
         messages.put("err.enc.cot.key", ": Provided key has incorrect syntax. (0-9)");
+
+        // Generate errors
+        messages.put("err.gen.try.key", ": \"Beale\" is book cipher. Getting key is possible through selecting text, that covers all needed characters.");
+
     }
 }

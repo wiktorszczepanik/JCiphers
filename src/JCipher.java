@@ -18,21 +18,24 @@ public class JCipher {
         String[] tempArgs = new String[] {
 //            "-t", "ROT13",
             "--type", "CEZAR",
-//            "-e", "test/Cezar/clear.txt",
-//            "--encrypt", "Tests/Rot13/clear.txt",
-//            "-d", "test/Cezar/Out14.txt",
-//            "--decrypt", "Tests/Rot13/out.txt",
+//            "-e", "test/ClearText/Cezar.txt",
+//            "--encrypt", "Tests/Rot13/Rot13.txt",
+//            "-d", "test/Cezar/Cezar.txt",
+//            "--decrypt", "Tests/Rot13/Rot13.txt",
 //            "-g",
 //            "--generate",
-//            "-k", "Tests/Rot13/out.txt",
-//            "--key", "test/Cezar/key.txt",
-//            "-o", "test/Cezar/Out14.txt"
-//            "--output", "Tests/Rot13/out.txt",
+            "-g", "100",
+//            "-k", "Tests/Rot13/Rot13.txt",
+//            "--key", "test/Keys/Cezar.txt",
+//            "-o", "test/Output/Dec/Cezar.txt"
+//            "--output", "test/Output/Gen/Rot13.txt",
 //            "-h",
 //            "--help",
         };
         String throwValue = "";
         try {
+            if (tempArgs.length == 0)
+                throw new FlagException(messages.get("err.flg.bas.zer"));
             if (tempArgs[0].equals("-h") || tempArgs[0].equals("--help"))
                 if (tempArgs.length > 1) throw new FlagException(messages.get("err.flg.typ.hlp"));
                 else System.out.println(messages.get("inf.flg.typ.hlp"));

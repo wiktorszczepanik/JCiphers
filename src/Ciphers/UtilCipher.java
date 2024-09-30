@@ -36,6 +36,11 @@ public abstract class UtilCipher {
         else generate();
     }
 
+    protected boolean isFileExist(ActionTypes possiblePath) {
+        File file = new File(valueSelector(possiblePath));
+        return file.exists();
+    }
+
     protected StringBuilder readFileContent(ActionTypes action) throws FileException {
         File file = new File(valueSelector(action));
         StringBuilder key = new StringBuilder();
@@ -105,8 +110,21 @@ public abstract class UtilCipher {
         return flagIndex;
     }
 
-    private String valueSelector(ActionTypes flag) {
+    protected String valueSelector(ActionTypes flag) {
         return flags.get(flagTupleSelector(flag)).value;
+    }
+
+    protected void print(StringBuilder transformedText) throws FileException {
+        if (flagTupleSelector(ActionTypes.OUTPUT) == -1)
+            System.out.println(transformedText);
+        else writeFileContent(ActionTypes.OUTPUT, transformedText);
+    }
+
+    protected void print(String text) throws FileException {
+        StringBuilder transformedText = new StringBuilder(text);
+        if (flagTupleSelector(ActionTypes.OUTPUT) == -1)
+            System.out.println(transformedText);
+        else writeFileContent(ActionTypes.OUTPUT, transformedText);
     }
 
 }
