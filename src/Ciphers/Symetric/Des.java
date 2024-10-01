@@ -34,7 +34,6 @@ public class Des extends UtilCipher implements BaseCipher, SymmetricCipher {
     @Override
     public void generate() throws GenerateException, FileException {
         // TODO: Correct DES generator.
-        //...
         String key;
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
