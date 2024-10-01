@@ -1,8 +1,7 @@
 package Components;
 
-import Ciphers.BaseCipher;
-import Ciphers.Symetric.Beale;
 import Ciphers.Symetric.Cezar;
+import Ciphers.Symetric.Des;
 import Ciphers.Symetric.Rot13;
 import Ciphers.Symetric.Vernam;
 import Ciphers.UtilCipher;
@@ -29,8 +28,8 @@ public class CipherSelector {
         return switch (CipherTypes.valueOf(cipherType)) {
             case CipherTypes.ROT13 -> new Rot13(options, flags);
             case CipherTypes.CEZAR -> new Cezar(options, flags);
-            case CipherTypes.BEALE -> new Beale(options, flags);
             case CipherTypes.VERNAM -> new Vernam(options, flags);
+            case CipherTypes.DES -> new Des(options, flags);
             // future ciphers ...
         };
     }

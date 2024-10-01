@@ -16,22 +16,46 @@ public class Vernam extends UtilCipher implements BaseCipher, SymmetricCipher {
         super(selectedOptions, flags);
     }
 
+    private StringBuilder algorithm(StringBuilder entryText, StringBuilder entryKey) {
+        int textLength = entryText.length();
+        char[] text = new char[textLength];
+        entryText.getChars(0, textLength, text, 0);
+        char[] key = new char[textLength];
+        entryKey.getChars(0, textLength, key, 0);
+
+        StringBuilder exitText = new StringBuilder();
+        --textLength;
+        char changed;
+        while (textLength >= 0) {
+            changed = (char) (text[textLength] ^ key[textLength]);
+            exitText.insert(0, changed);
+            textLength--;
+        }
+        return exitText;
+    }
+
     @Override
     public void encrypt() throws EncryptionException, FileException {
-
+        StringBuilder cleanText = readFileContent(ActionTypes.ENCRYPT);
+        StringBuilder keyValue = readFileContent(ActionTypes.KEY);
+        StringBuilder encryptedText = algorithm(cleanText, keyValue);
+        print(encryptedText);
     }
 
     @Override
     public void decrypt() throws DecryptionException, FileException {
-
+        StringBuilder encryptedText = readFileContent(ActionTypes.DECRYPT);
+        StringBuilder keyValue = readFileContent(ActionTypes.KEY);
+        StringBuilder decryptedText = algorithm(encryptedText, keyValue);
+        print(decryptedText);
     }
 
     @Override
     public void generate() throws GenerateException, FileException {
-        int charNum = -1;
+        long charNum = -1;
         try {
             String charLength = valueSelector(ActionTypes.GENERATE);
-            charNum = Integer.parseInt(charLength);
+            charNum = Long.parseLong(charLength);
             if (charNum < 0) throw new Exception();
         } catch (Exception exception) {
             throw new GenerateException(messages.get("err.flg.gen.out"));
@@ -39,7 +63,7 @@ public class Vernam extends UtilCipher implements BaseCipher, SymmetricCipher {
         StringBuilder keyText = new StringBuilder();
         SecureRandom secRandom = new SecureRandom();
         char tempChar;
-        for (int i = 0; i < charNum; i++) {
+        for (long i = 0; i < charNum; i++) {
             tempChar = (char) secRandom.nextInt(Character.MAX_VALUE);
             keyText.append(tempChar);
         }

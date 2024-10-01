@@ -63,6 +63,7 @@ public class Messages {
 
         // Generate errors
         messages.put("err.gen.try.key", ": \"Beale\" is book cipher. Getting key is possible through selecting text, that covers all needed characters.");
+        messages.put("err.gen.des.key", ": No such algorithm.");
 
     }
 }

@@ -10,12 +10,14 @@ import Exceptions.FileException;
 import Exceptions.GenerateException;
 import Structures.FlagTuple;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-public class Beale extends UtilCipher
-        implements BaseCipher, SymmetricCipher {
+public class Des extends UtilCipher implements BaseCipher, SymmetricCipher {
 
-    public Beale(byte selectedOptions, List<FlagTuple<ActionTypes, String>> flags) {
+    public Des(byte selectedOptions, List<FlagTuple<ActionTypes, String>> flags) {
         super(selectedOptions, flags);
     }
 
@@ -31,6 +33,15 @@ public class Beale extends UtilCipher
 
     @Override
     public void generate() throws GenerateException, FileException {
-        throw new GenerateException(messages.get("err.gen.try.key"));
+        // TODO: Correct DES generator.
+        String key;
+        try {
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
+            SecretKey secretKey = keyGenerator.generateKey();
+            key = secretKey.toString();
+        } catch (Exception exception) {
+            throw new GenerateException(messages.get("err.gen.des.key"));
+        }
+        print(key);
     }
 }
