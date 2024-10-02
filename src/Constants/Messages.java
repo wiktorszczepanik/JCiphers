@@ -43,6 +43,8 @@ public class Messages {
         messages.put("err.flg.mis.key", ": --key is incorrect flag in current options configuration.");
         messages.put("err.flg.typ.out", ": Incorrect flags -> --output flag.");
         messages.put("err.flg.gen.out", ": Incorrect value for generate flag.");
+        messages.put("err.flg.enc.key", ": Invalid key for DES encryption.");
+        messages.put("err.flg.dec.key", ": Invalid key for DES encryption.");
 
         // Reading files exceptions
         messages.put("err.red.reg.enc", ": Problem with reading file with encryption text.");
@@ -53,6 +55,8 @@ public class Messages {
         messages.put("err.red.nul.key", ": Provided key file is empty.");
         messages.put("err.red.reg.all", ": Problem with reading file.");
         messages.put("err.red.nul.all", ": Provided file is empty.");
+        messages.put("err.red.des.alg", ": Problem with selecting DES algorithm.");
+        messages.put("err.red.des.run", ": Problem with running DES algorithm.");
 
         // Writing files exceptions
         messages.put("err.wrt.reg.enc", ": Problem with writing encrypted data to provided file.");
@@ -64,6 +68,7 @@ public class Messages {
         // Generate errors
         messages.put("err.gen.try.key", ": \"Beale\" is book cipher. Getting key is possible through selecting text, that covers all needed characters.");
         messages.put("err.gen.des.key", ": No such algorithm.");
+        messages.put("err.gen.des.out", ": Issue with wiring key to file.");
 
     }
 }

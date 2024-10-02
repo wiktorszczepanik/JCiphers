@@ -18,17 +18,17 @@ public class JCipher {
         String[] tempArgs = new String[] {
 //            "-t", "ROT13",
             "--type", "DES",
-//            "-e", "test/ClearText/Vernam.txt",
+//            "-e", "test/ClearText/Des.txt",
 //            "--encrypt", "Tests/Rot13/Rot13.txt",
-//            "-d", "test/CipherText/Vernam.txt",
+            "-d", "test/CipherText/Des.txt",
 //            "--decrypt", "Tests/Rot13/Rot13.txt",
-            "-g",
+//            "-g",
 //            "--generate",
 //            "-g", "100",
 //            "-k", "test/Keys/Vernam100.txt",
-//            "--key", "test/Keys/Cezar.txt",
-//            "-o", "test/Output/Dec/Cezar.txt"
-//            "--output", "test/Output/Dec/Vernam.txt",
+            "--key", "test/Keys/Des.txt",
+//            "-o", "test/CipherText/Des.txt"
+//            "--output", "test/Keys/Des.txt",
 //            "-h",
 //            "--help",
         };

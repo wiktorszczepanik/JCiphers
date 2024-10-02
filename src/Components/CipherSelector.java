@@ -1,9 +1,7 @@
 package Components;
 
-import Ciphers.Symetric.Cezar;
-import Ciphers.Symetric.Des;
-import Ciphers.Symetric.Rot13;
-import Ciphers.Symetric.Vernam;
+import Ciphers.Symetric.*;
+import Ciphers.Unsimetric.Rsa;
 import Ciphers.UtilCipher;
 import Constants.Flags.ActionTypes;
 import Constants.Flags.CipherTypes;
@@ -30,6 +28,7 @@ public class CipherSelector {
             case CipherTypes.CEZAR -> new Cezar(options, flags);
             case CipherTypes.VERNAM -> new Vernam(options, flags);
             case CipherTypes.DES -> new Des(options, flags);
+            case CipherTypes.RSA -> new Rsa(options, flags);
             // future ciphers ...
         };
     }
