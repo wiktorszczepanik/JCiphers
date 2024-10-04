@@ -42,7 +42,7 @@ public class Messages {
         messages.put("err.flg.typ.key", ": --key flag is missing. It is required with provided cipher type.");
         messages.put("err.flg.mis.key", ": --key is incorrect flag in current options configuration.");
         messages.put("err.flg.typ.out", ": Incorrect flags -> --output flag.");
-        messages.put("err.flg.gen.out", ": Incorrect value for generate flag.");
+        messages.put("err.flg.gen.out", ": Incorrect value for generate flag. (-g 2048)");
         messages.put("err.flg.enc.key", ": Invalid key for DES encryption.");
         messages.put("err.flg.dec.key", ": Invalid key for DES encryption.");
 
@@ -57,6 +57,10 @@ public class Messages {
         messages.put("err.red.nul.all", ": Provided file is empty.");
         messages.put("err.red.des.alg", ": Problem with selecting DES algorithm.");
         messages.put("err.red.des.run", ": Problem with running DES algorithm.");
+        messages.put("err.red.rsa.run", ": Problem with running RSA algorithm.");
+        messages.put("err.red.key.chc", ": Provided file does not contain any public/private key headers.");
+        messages.put("err.red.key.ioe", ": Provided file does not exist.");
+        messages.put("err.red.key.spc", ": Incorrect specification of the key.");
 
         // Writing files exceptions
         messages.put("err.wrt.reg.enc", ": Problem with writing encrypted data to provided file.");
@@ -66,7 +70,6 @@ public class Messages {
         messages.put("err.enc.cot.key", ": Provided key has incorrect syntax. (0-9)");
 
         // Generate errors
-        messages.put("err.gen.try.key", ": \"Beale\" is book cipher. Getting key is possible through selecting text, that covers all needed characters.");
         messages.put("err.gen.des.key", ": No such algorithm.");
         messages.put("err.gen.des.out", ": Issue with wiring key to file.");
 

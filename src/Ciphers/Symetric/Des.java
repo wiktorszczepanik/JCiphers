@@ -83,24 +83,24 @@ public class Des extends UtilCipher implements BaseCipher, SymmetricCipher {
 
     @Override
     public void generate() throws GenerateException, FileException {
-        String keyToBase;
+        String keyToBase64;
         try {
             SecretKey secretKey;
             KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
             keyGenerator.init(56);
             secretKey = keyGenerator.generateKey();
             byte[] keyBytes = secretKey.getEncoded();
-            keyToBase = Base64.getEncoder().encodeToString(keyBytes);
+            keyToBase64 = Base64.getEncoder().encodeToString(keyBytes);
         } catch (Exception exception) {
             throw new GenerateException(messages.get("err.gen.des.key"));
         }
         if (flagTupleSelector(ActionTypes.OUTPUT) != -1) {
             String keyFileName = valueSelector(ActionTypes.OUTPUT);
             try (FileOutputStream fos = new FileOutputStream(keyFileName)) {
-                fos.write(keyToBase.getBytes());
+                fos.write(keyToBase64.getBytes());
             } catch (IOException ioe) {
                 throw new GenerateException(messages.get("err.gen.des.out"));
             }
-        } else System.out.println(keyToBase);
+        } else System.out.println(keyToBase64);
     }
 }

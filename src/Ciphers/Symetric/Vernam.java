@@ -55,7 +55,8 @@ public class Vernam extends UtilCipher implements BaseCipher, SymmetricCipher {
         long charNum = -1;
         try {
             String charLength = valueSelector(ActionTypes.GENERATE);
-            charNum = Long.parseLong(charLength);
+            // Convert to bite length
+            charNum = Long.parseLong(charLength) / 16;
             if (charNum < 0) throw new Exception();
         } catch (Exception exception) {
             throw new GenerateException(messages.get("err.flg.gen.out"));

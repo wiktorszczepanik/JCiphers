@@ -1,1 +1,1 @@
-Przykładowy text do szyfru Vernama.
+Example Vernam text.
