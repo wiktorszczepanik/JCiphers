@@ -10,40 +10,39 @@ import Structures.FlagTuple;
 
 import java.util.List;
 
+// "-t", "ROT13",
+// "--type", "RSA",
+// "-e", "test/ClearText/Rsa.txt",
+// "--encrypt", "Tests/Rot13/Rot13.txt",
+// "-d", "test/CipherText/Rsa.txt",
+// "--decrypt", "test/CipherText/Rsa.txt",
+// "-g",
+// "--generate",
+// "-g", "4000",
+// "-k", "test/Keys/Rsa.txt.private",
+// "--key", "test/Keys/Rsa.txt.public",
+// "-o", "test/CipherText/Rsa.txt"
+// "--output", "test/Keys/Rsa.txt",
+// "-h",
+// "--help",
+
 public class JCipher {
 
     static Messages messages = Messages.getInstance();
 
     public static void main(String[] args) {
-        String[] tempArgs = new String[] {
-//            "-t", "ROT13",
-//            "--type", "RSA",
-//            "-e", "test/ClearText/Rsa.txt",
-//            "--encrypt", "Tests/Rot13/Rot13.txt",
-//            "-d", "test/CipherText/Rsa.txt",
-//            "--decrypt", "test/CipherText/Rsa.txt",
-//            "-g",
-//            "--generate",
-//            "-g", "4000",
-//            "-k", "test/Keys/Rsa.txt.private",
-//            "--key", "test/Keys/Rsa.txt.public",
-//            "-o", "test/CipherText/Rsa.txt"
-//            "--output", "test/Keys/Rsa.txt",
-//            "-h",
-//            "--help",
-        };
         String throwValue = "";
         try {
-            if (tempArgs.length == 0)
+            if (args.length == 0)
                 throw new FlagException(messages.get("err.flg.bas.zer"));
-            if (tempArgs[0].equals("-h") || tempArgs[0].equals("--help"))
-                if (tempArgs.length > 1) throw new FlagException(messages.get("err.flg.typ.hlp"));
+            if (args[0].equals("-h") || args[0].equals("--help"))
+                if (args.length > 1) throw new FlagException(messages.get("err.flg.typ.hlp"));
                 else System.out.println(messages.get("inf.flg.typ.hlp"));
             else { // Entry flags checker
-                BasicValidation.flagsNumber(tempArgs, messages);
+                BasicValidation.flagsNumber(args, messages);
 
                 // Flags collection
-                var flags = new FlagCollector(tempArgs);
+                var flags = new FlagCollector(args);
                 flags.collectFlags();
                 flags.sortFlags();
                 flags.sequenceBits();
