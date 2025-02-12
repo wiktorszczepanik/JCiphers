@@ -1,7 +1,7 @@
 package Components;
 
 import Ciphers.Symetric.*;
-import Ciphers.Unsimetric.Rsa;
+import Ciphers.Asymmetric.Rsa;
 import Ciphers.UtilCipher;
 import Constants.Flags.ActionTypes;
 import Constants.Flags.CipherTypes;

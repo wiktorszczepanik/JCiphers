@@ -1,4 +1,4 @@
-package Ciphers.Unsimetric;
+package Ciphers.Asymmetric;
 
 import Ciphers.AsymmetricCipher;
 import Ciphers.BaseCipher;
