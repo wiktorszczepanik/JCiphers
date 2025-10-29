@@ -10,6 +10,7 @@ import Structures.FlagTuple;
 
 import java.util.List;
 
+/* Example flags */
 // "-t", "ROT13",
 // "--type", "RSA",
 // "-e", "test/ClearText/Rsa.txt",
@@ -75,6 +76,6 @@ public class JCipher {
         } catch (FileException fileException) {
             throwValue = fileException.getMessage();
         }
-        System.err.print(throwValue);
+        if (!throwValue.isEmpty()) System.err.print(throwValue);
     }
 }

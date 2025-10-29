@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JCiphers:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JCiphers_jar</output-path>
+    <root id="archive" name="JCiphers.jar">
+      <element id="module-output" name="JCiphers" />
+    </root>
+  </artifact>
+</component>

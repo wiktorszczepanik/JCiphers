@@ -18,8 +18,3 @@ Ultimately, the program is intended to be a CLI, but due to the constant additio
 * "2048" in `--generate` options example refers to number of **bits** for the key. Number of bits are only applicable for Vernam and RSA.
 ### Attention
 Please take into account that a significant part of the algorithms is not recognized as a cryptographic standard due to their low security level. The program also includes, classical ciphers, which are treated more as a curiosity than viable solutions.
-### Installation
-After improving the main class *(src/JCipher)* so that it reads **String[] args** instead of **tempArgs** array, the compiled program can be added as an alias to *.bashrc* on Linux for global access.
-```Bash
-alias jcipher='java /program/location/JCipher'
-```
