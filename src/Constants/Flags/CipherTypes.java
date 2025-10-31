@@ -7,7 +7,8 @@ public enum CipherTypes {
     CEZAR((byte) 0b1_100_10, (byte) 0b1_010_10, (byte) 0b1_001_00),
     VERNAM((byte) 0b1_100_10, (byte) 0b1_010_10, (byte) 0b1_001_00),
     DES((byte) 0b1_100_10, (byte) 0b1_010_10, (byte) 0b1_001_00),
-    RSA((byte) 0b1_100_10, (byte) 0b1_010_10, (byte) 0b1_001_00);
+    RSA((byte) 0b1_100_10, (byte) 0b1_010_10, (byte) 0b1_001_00),
+    VIGENERE((byte) 0b1_100_10, (byte) 0b1_010_10, (byte) 0b1_001_00);
 
 
     private final byte encyptionOptions;

@@ -29,6 +29,7 @@ public class CipherSelector {
             case CipherTypes.VERNAM -> new Vernam(options, flags);
             case CipherTypes.DES -> new Des(options, flags);
             case CipherTypes.RSA -> new Rsa(options, flags);
+            case CipherTypes.VIGENERE -> new Vigenere(options, flags);
             // future ciphers ...
         };
     }
