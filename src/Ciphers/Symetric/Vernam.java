@@ -84,6 +84,8 @@ public class Vernam extends UtilCipher implements BaseCipher, SymmetricCipher {
         for (long i = 0; i < charNum; i++) {
             // tempChar = (char) secRandom.nextInt(Character.MAX_VALUE);
             // keyText.append(tempChar);
+
+            // Limitation to ascii basic characters
             tempChar = (char) secRandom.nextInt(94);
             keyText.append((char) (tempChar + 32));
         }

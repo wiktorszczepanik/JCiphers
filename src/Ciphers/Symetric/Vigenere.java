@@ -22,8 +22,9 @@ public class Vigenere extends UtilCipher implements BaseCipher, SymmetricCipher 
     private StringBuilder equalizer(StringBuilder cleanText, StringBuilder keyText) {
         int cleanTextLen = cleanText.length();
         int keyTextLen = keyText.length();
-        if (cleanTextLen < keyTextLen) keyText.setLength(cleanTextLen);
-        else {
+        if (cleanTextLen < keyTextLen) {
+            keyText.setLength(cleanTextLen);
+        } else {
             String originalKey = keyText.toString();
             int appendSize = cleanTextLen - keyTextLen;
             int j = 0;
@@ -33,6 +34,12 @@ public class Vigenere extends UtilCipher implements BaseCipher, SymmetricCipher 
                 if (j >= originalKey.length()) j = 0;
             }
         }
+        for (int i = 0; i < cleanTextLen; i++) {
+            if (cleanText.charAt(i) == 0x20)
+                keyText.setCharAt(i, ' ');
+        }
+        if (cleanText.charAt(cleanTextLen - 1) == '\n')
+            keyText.setLength(cleanTextLen - 1);
         return keyText;
     }
 
@@ -41,7 +48,18 @@ public class Vigenere extends UtilCipher implements BaseCipher, SymmetricCipher 
     public void encrypt() throws EncryptionException, FileException {
         StringBuilder cleanText = readFileContent(ActionTypes.ENCRYPT);
         StringBuilder keyValue = equalizer(cleanText, readFileContent(ActionTypes.KEY));
-        // ...
+        var upperCleanText = new StringBuilder(cleanText.toString().toUpperCase());
+        StringBuilder encryptedText = new StringBuilder();
+        for (int i = 0; i < upperCleanText.length(); i++) {
+            if (upperCleanText.charAt(i) != ' ')
+                encryptedText.append(
+                    (char) (((upperCleanText.charAt(i) - 65 + keyValue.charAt(i) - 65) % 26) + 65)
+                );
+            else encryptedText.append(' ');
+        }
+        System.out.println(upperCleanText);
+        System.out.println(keyValue);
+        print(encryptedText);
     }
 
     @Override
