@@ -3,7 +3,7 @@ JCipher is a cryptographic tool that implements algorithms for encryption, decry
 
 Ultimately, the program is intended to be a CLI, but due to the constant addition of algorithms, the main class file is being rewritten to test cryptographic solutions faster.
 ### Currently existing algorithms
-`Cezar` `DES` `Rot13` `RSA` `Vernam`
+`Cezar` `DES` `Rot13` `RSA` `Vernam` `Vigenere`
 ### Options
 | Flag | Long Form    | Description                                        | Example                           |
 |------|--------------|----------------------------------------------------|-----------------------------------|

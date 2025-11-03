@@ -60,10 +60,10 @@ public class Cezar extends UtilCipher
         StringBuilder tempKey;
         if (isFileExist(ActionTypes.KEY))
             tempKey = readFileContent(ActionTypes.KEY);
-        else tempKey = new StringBuilder(
-                valueSelector(ActionTypes.KEY));
+        else tempKey = new StringBuilder(valueSelector(ActionTypes.KEY));
+        var tempKeyText = tempKey.toString().strip();
         int key;
-        try { key = Integer.parseInt(tempKey.toString());
+        try { key = Integer.parseInt(tempKeyText);
         } catch (Exception exception) {
             throw new FileException(messages.get("err.enc.cot.key"));
         }

@@ -23,7 +23,33 @@ public class Messages {
     private void setMessages() {
         // Regular info
         messages.put("inf.flg.typ.hnt", "Use \"--help\" flag to clarify program usage.");
-        messages.put("inf.flg.typ.hlp", "There will be HELP instruction.");
+        messages.put("inf.flg.typ.hlp",
+            "JCipher is a cryptographic CLI tool that implements algorithms for encryption, decryption and key generation.\n" +
+            "\n" +
+            "Supported algorithms:\n" +
+            "Cezar DES Rot13 RSA Vernam Vigenere\n" +
+            "\n" +
+            "Options:\n" +
+            "+------+------------+----------------------------------------------------+---------------------------------+\n" +
+            "| Flag | Long Form  | Description                                        | Example                         |\n" +
+            "+------+------------+----------------------------------------------------+---------------------------------+\n" +
+            "|  -t  | --type     | Select algorithm type. (RSA, DES, VERNAM...)       | --type \"RSA\"                    |\n" +
+            "|  -e  | --encrypt  | Select file for encryption.                        | --encrypt fileForEncryption.txt |\n" +
+            "|  -d  | --decrypt  | Select file for decryption.                        | --decrypt fileForDecryption.txt |\n" +
+            "|  -g  | --generate | Generate key / keys for provided algorithm.        | --generate / --generate 2048    |\n" +
+            "|  -k  | --key      | Select file with key for encryption or decryption. | --key keyFile.txt               |\n" +
+            "|  -o  | --output   | Writes output to file.                             | --output output.txt             |\n" +
+            "|  -h  | --help     | Prints program instruction to the console.         | --help                          |\n" +
+            "+------+------------+----------------------------------------------------+---------------------------------+\n" +
+            "\n" +
+            "Example Usage:\n" +
+            "Key generation..$ java -jar JCiphers.jar -t \"vernam\" -g 100 -o key.txt\n" +
+            "Encryption......$ java -jar JCiphers.jar -t \"vernam\" -e file.txt -k key.txt -o enc.txt\n" +
+            "Decrtyption.....$ java -jar JCiphers.jar -t \"vernam\" -d enc.txt -k key.txt -o dec.txt\n" +
+            "\n" +
+            "More info:\n" +
+            "https://github.com/wiktorszczepanik/JCiphers"
+        );
 
         // Flag exceptions & errors
         messages.put("err.flg.bas.zer", ": Flags not provided.");
