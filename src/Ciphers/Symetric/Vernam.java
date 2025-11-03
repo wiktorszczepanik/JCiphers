@@ -31,6 +31,10 @@ public class Vernam extends UtilCipher implements BaseCipher, SymmetricCipher {
             exitText.insert(0, changed);
             textLength--;
         }
+//        for (int i = 0; i < textLength; i++) {
+//            char changed = (char) (text[i] ^ key[i]);
+//            exitText.append(changed);
+//        }
         return exitText;
     }
 
@@ -54,7 +58,7 @@ public class Vernam extends UtilCipher implements BaseCipher, SymmetricCipher {
     @Override
     public void encrypt() throws EncryptionException, FileException {
         StringBuilder cleanText = readFileContent(ActionTypes.ENCRYPT);
-        StringBuilder keyValue = equalizer(cleanText, readFileContent(ActionTypes.KEY));
+        var keyValue = new StringBuilder(equalizer(cleanText, readFileContent(ActionTypes.KEY)).toString().strip());
         StringBuilder encryptedText = algorithm(cleanText, keyValue);
         print(encryptedText);
     }
@@ -62,8 +66,9 @@ public class Vernam extends UtilCipher implements BaseCipher, SymmetricCipher {
     @Override
     public void decrypt() throws DecryptionException, FileException {
         StringBuilder encryptedText = readFileContent(ActionTypes.DECRYPT);
-        StringBuilder keyValue = equalizer(encryptedText, readFileContent(ActionTypes.KEY));
+        var keyValue = new StringBuilder(equalizer(encryptedText, readFileContent(ActionTypes.KEY)).toString().strip());
         StringBuilder decryptedText = algorithm(encryptedText, keyValue);
+        decryptedText.setLength(decryptedText.length() - 2); // temp solution
         print(decryptedText);
     }
 
@@ -82,6 +87,8 @@ public class Vernam extends UtilCipher implements BaseCipher, SymmetricCipher {
         SecureRandom secRandom = new SecureRandom();
         char tempChar;
         for (long i = 0; i < charNum; i++) {
+
+            // Characters Up to max values
             // tempChar = (char) secRandom.nextInt(Character.MAX_VALUE);
             // keyText.append(tempChar);
 

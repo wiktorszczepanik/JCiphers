@@ -83,6 +83,8 @@ public abstract class UtilCipher {
         try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.append(text);
+            if (!text.toString().endsWith("\n"))
+                fileWriter.append("\n");
             fileWriter.close();
         } catch (IOException exception) {
             selectWriteExceptionMessage(action);

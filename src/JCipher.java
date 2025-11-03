@@ -76,6 +76,9 @@ public class JCipher {
         } catch (FileException fileException) {
             throwValue = fileException.getMessage();
         }
-        if (!throwValue.isEmpty()) System.err.print(throwValue);
+        if (!throwValue.isEmpty()) {
+            System.err.print(throwValue);
+            System.out.println(messages.get("inf.flg.typ.hnt"));
+        }
     }
 }

@@ -20,6 +20,7 @@ public class Vigenere extends UtilCipher implements BaseCipher, SymmetricCipher 
     }
 
     private StringBuilder equalizer(StringBuilder cleanText, StringBuilder keyText) {
+        keyText = new StringBuilder(keyText.toString().strip());
         int cleanTextLen = cleanText.length();
         int keyTextLen = keyText.length();
         if (cleanTextLen < keyTextLen) {
@@ -36,10 +37,8 @@ public class Vigenere extends UtilCipher implements BaseCipher, SymmetricCipher 
         }
         for (int i = 0; i < cleanTextLen; i++) {
             if (cleanText.charAt(i) == 0x20)
-                keyText.setCharAt(i, ' ');
+                keyText.insert(i, ' ');
         }
-        if (cleanText.charAt(cleanTextLen - 1) == '\n')
-            keyText.setLength(cleanTextLen - 1);
         return keyText;
     }
 
@@ -47,24 +46,39 @@ public class Vigenere extends UtilCipher implements BaseCipher, SymmetricCipher 
     @Override
     public void encrypt() throws EncryptionException, FileException {
         StringBuilder cleanText = readFileContent(ActionTypes.ENCRYPT);
+        cleanText = new StringBuilder(cleanText.toString().strip());
         StringBuilder keyValue = equalizer(cleanText, readFileContent(ActionTypes.KEY));
         var upperCleanText = new StringBuilder(cleanText.toString().toUpperCase());
         StringBuilder encryptedText = new StringBuilder();
         for (int i = 0; i < upperCleanText.length(); i++) {
-            if (upperCleanText.charAt(i) != ' ')
+            char inputChar = upperCleanText.charAt(i); // M = 77
+            char keyChar = keyValue.charAt(i); // O = 79
+            if (inputChar != ' ')
                 encryptedText.append(
-                    (char) (((upperCleanText.charAt(i) - 65 + keyValue.charAt(i) - 65) % 26) + 65)
+                    (char) ((inputChar - 'A' + (keyChar - 'A')) % 26 + 'A')
                 );
             else encryptedText.append(' ');
         }
-        System.out.println(upperCleanText);
-        System.out.println(keyValue);
         print(encryptedText);
     }
 
     @Override
     public void decrypt() throws DecryptionException, FileException {
-
+        StringBuilder encryptedText = readFileContent(ActionTypes.DECRYPT);
+        encryptedText = new StringBuilder(encryptedText.toString().strip());
+        StringBuilder keyValue = equalizer(encryptedText, readFileContent(ActionTypes.KEY));
+        var upperCleanText = new StringBuilder(encryptedText.toString().toUpperCase());
+        StringBuilder decryptedText = new StringBuilder();
+        for (int i = 0; i < upperCleanText.length(); i++) {
+            char inputChar = upperCleanText.charAt(i); // M = 77
+            char keyChar = keyValue.charAt(i); // O = 79
+            if (inputChar != ' ')
+                decryptedText.append(
+                    (char) ((inputChar - keyChar + 26) % 26 + 'A')
+                );
+            else decryptedText.append(' ');
+        }
+        print(decryptedText);
     }
 
     @Override

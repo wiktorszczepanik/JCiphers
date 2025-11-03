@@ -17,11 +17,12 @@ public class Messages {
     }
 
     public String get(String key) {
-        return messages.get(key);
+        return messages.get(key).concat("\n");
     }
 
     private void setMessages() {
         // Regular info
+        messages.put("inf.flg.typ.hnt", "Use \"--help\" flag to clarify program usage.");
         messages.put("inf.flg.typ.hlp", "There will be HELP instruction.");
 
         // Flag exceptions & errors
